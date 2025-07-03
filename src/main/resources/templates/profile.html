@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
+</head>
+<body>
+<div class="wrap">
+    <div class="card main_card">
+        <div>
+            <img alt="logo" th:src="@{'/icons/avatar.svg'}">
+        </div>
+
+        <div>
+            <h2 class="name" th:utext="${#strings.replace(user.name, ' ', '<br>')}"></h2>
+            <span class="city" th:text="${user.username}"></span>
+            <button type="submit" class="btn edit_btn">Редактировать</button>
+        </div>
+    </div>
+
+    <div class="card technologies_card">
+        <span class="card_title">Технологии</span>
+        <ul>
+            <li th:each="tech : ${user?.technology}" th:text="${tech}"></li>
+        </ul>
+    </div>
+
+    <div class="card contact_card">
+        <span class="card_title">Контакты</span>
+        <div class="info_card">
+            <a th:href="${user?.email}" class="info_item" target="_blank">
+                <img alt="E-mail" th:src="@{'/icons/icon.svg'}" >
+                <span>E-mail</span>
+            </a>
+
+            <a th:href="${user?.gitHub}" class="info_item" target="_blank">
+                <img alt="Github" th:src="@{'/icons/icon.svg'}" >
+                <span>GitHub</span>
+            </a>
+
+            <a th:href="${user?.linkedIn}" class="info_item" target="_blank">
+                <img alt="Linkedin" th:src="@{'/icons/icon.svg'}" >
+                <span>Linkedin</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="card about_card">
+        <span class="card_title">О себе</span>
+        <p th:text="${user.about}"></p>
+    </div>
+    <form th:action="@{/logout}" method="post" class="form form_profile">
+        <button type="submit" class="input btn">Выйти</button>
+    </form>
+</div>
+</body>
+</html>

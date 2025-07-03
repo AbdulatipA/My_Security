@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homePage.css}">
+</head>
+<body>
+<div class="container">
+    <h2 class="title_hp">Добро пожаловать на начальную страницу, пройдите авторизацию, чтобы посмотреть свой профиль</h2>
+    <div>
+        <a th:href="@{/api/v1/login}" class="btn_hp">Авторизоваться</a>
+        <a th:href="@{/api/v1/reg}" class="btn_hp">Зарегистрироваться</a>
+    </div>
+</div>
+</body>
+</html>

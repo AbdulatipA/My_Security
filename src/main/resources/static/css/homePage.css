@@ -1,0 +1,26 @@
+.title_hp {
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.btn_hp {
+    background-color: #388EF4;
+    font-size: 25px;
+    transition: background-color 0.2s;
+    color: white;
+    border-radius: 8px;
+    padding: 17px;
+    font-weight:normal;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.btn_hp:active {
+    background-color: #025dcc;
+}
+
+.container {
+    padding-bottom: 50px;
+}
