@@ -22,8 +22,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/icons/**").permitAll()
-                        .requestMatchers("/api/v1/profile").authenticated()
+                        .requestMatchers("/css/**", "/icons/**", "/js/**").permitAll()
+                        .requestMatchers("/api/v1/profile", "/api/v1/editProfile").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

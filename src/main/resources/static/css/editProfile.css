@@ -1,0 +1,59 @@
+.technologies-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.technology-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.technology-tag {
+    background-color: #E8E8E8;
+    border-radius: 16px;
+    padding: 8px 16px;
+    font-size: 18px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.technology-tag .remove-btn {
+    font-size: 14px;
+    margin-left: 8px;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.technology-tag .remove-btn:hover {
+    color: #FF5722;
+}
+
+.add-technology {
+    display: flex;
+    position: relative;
+}
+
+#newTechnology {
+    flex-grow: 1;
+}
+
+.add-btn {
+    background-color: #B3AE60;
+    color: white;
+    transition: background-color 0.2s;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 200px;
+}
+
+.add-btn:active {
+    background-color: #B7950B;
+}

@@ -16,7 +16,8 @@
         <div>
             <h2 class="name" th:utext="${#strings.replace(user.name, ' ', '<br>')}"></h2>
             <span class="city" th:text="${user.username}"></span>
-            <button type="submit" class="btn edit_btn">Редактировать</button>
+            <a th:href="@{/api/v1/editProfile}" class="btn edit_btn">Редактировать</a>
+
         </div>
     </div>
 
@@ -32,17 +33,17 @@
         <div class="info_card">
             <a th:href="${user?.email}" class="info_item" target="_blank">
                 <img alt="E-mail" th:src="@{'/icons/icon.svg'}" >
-                <span>E-mail</span>
+                <span th:text="${user.email}"></span>
             </a>
 
             <a th:href="${user?.gitHub}" class="info_item" target="_blank">
                 <img alt="Github" th:src="@{'/icons/icon.svg'}" >
-                <span>GitHub</span>
+                <span th:text="${user.gitHub}"></span>
             </a>
 
             <a th:href="${user?.linkedIn}" class="info_item" target="_blank">
                 <img alt="Linkedin" th:src="@{'/icons/icon.svg'}" >
-                <span>Linkedin</span>
+                <span th:text="${user.linkedIn}"></span>
             </a>
         </div>
     </div>

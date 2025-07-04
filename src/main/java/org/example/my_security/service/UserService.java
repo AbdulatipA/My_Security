@@ -31,10 +31,18 @@ public class UserService implements UserDetailsService {
        User userSaved = userRepository.findById(user.getId())
                .orElseThrow(() -> new RuntimeException("Такой пользователь не найден"));
 
-        userSaved.setEmail(user.getEmail());
-        userSaved.setName(user.getName());
+       userSaved.setName(user.getName());
+       userSaved.setEmail(user.getEmail());
+       userSaved.setGitHub(user.getGitHub());
+       userSaved.setLinkedIn(user.getLinkedIn());
+       userSaved.setTechnology(user.getTechnology());
+       userSaved.setAbout(user.getAbout());
 
-        return userRepository.save(userSaved);
+       if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+           userSaved.setPassword(passwordEncoder.encode(user.getPassword()));
+       }
+
+       return userRepository.save(userSaved);
     }
 
     public User findByUsername(String username) {

@@ -67,8 +67,12 @@
     font-weight: 500;
     cursor: pointer;
     position: relative;
+    display: block;
+    width: 160px;
 }
-
+.edit_btn:hover {
+    background: none;
+}
 .edit_btn::after {
     content: "";
     background-size: contain;
@@ -79,7 +83,7 @@
     background-image: url(/icons/edit-filled.svg);
     position: absolute;
     top: -2px;
-    right: -28px;
+    right: -10px;
 }
 
 

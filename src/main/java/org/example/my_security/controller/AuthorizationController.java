@@ -6,7 +6,11 @@ import org.example.my_security.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -25,16 +29,31 @@ public class AuthorizationController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(Model model) {
-        String username = "admin";
+    public String showProfile(Model model, Principal principal) {
+        String username = principal.getName();
         User user = userService.findByUsername(username);
 
         model.addAttribute("user", user);
         return "profile";
     }
 
-    @GetMapping("/reg")
-    public String regForm(Model model) {
-        return "reg";
+    @PostMapping("/editProfile")
+    public String editProfile(@ModelAttribute("user") User user, Principal principal) {
+        User currentUser = userService.findByUsername(principal.getName());
+
+        user.setId(currentUser.getId());
+
+        userService.update(user);
+        return "redirect:/api/v1/profile";
+    }
+
+
+    @GetMapping("/editProfile")
+    public String editProfile(Model model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+
+        model.addAttribute("user", currentUser);
+        return "editProfile";
     }
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editProfile.css}">
+</head>
+
+
+<body>
+<div class="container">
+    <h2 class="title">Окно редактирования</h2>
+
+
+    <form th:action="@{/api/v1/editProfile}" method="post" th:object="${user}" class="form">
+        <input type="text" th:field="*{name}" required class="input" placeholder="Имя и фамилия">
+        <input type="password" th:field="*{password}" required class="input" placeholder="пароль">
+
+        <input type="text" th:field="*{email}" required class="input" placeholder="e-mail">
+        <input type="text" th:field="*{gitHub}" required class="input" placeholder="github">
+        <input type="text" th:field="*{linkedIn}" required class="input" placeholder="linkedIn">
+
+
+        <input type="hidden" id="technologiesInput" name="technology" th:field="*{technology}" />
+
+
+        <div class="technologies-container">
+            <div class="technology-inputs">
+                <!-- Здесь будут отображаться выбранные технологии -->
+            </div>
+
+            <!-- Поле для ввода новой технологии -->
+            <div class="add-technology">
+                <input type="text" maxlength="25" id="newTechnology" class="input" placeholder="Введите технологию">
+                <button type="button" id="addTechnologyBtn" class="input btn add-btn">Добавить</button>
+            </div>
+        </div>
+        <textarea th:field="*{about}" required class="input" placeholder="немного о себе"></textarea>
+        <button type="submit" class="input btn">Изменить</button>
+    </form>
+</div>
+    <script th:src="@{/js/addSctipt.js}"></script>
+</body>
+</html>

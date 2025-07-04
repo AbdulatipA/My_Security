@@ -44,6 +44,7 @@ public class User implements UserDetails {
 
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_technologies", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "technologies")
     private Set<String> technology;
 
