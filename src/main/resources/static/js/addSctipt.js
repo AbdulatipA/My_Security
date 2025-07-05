@@ -1,46 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const technologyInputs = document.querySelector(".technology-inputs");
+    const technologyList = []; // Хранение технологий
     const newTechnologyInput = document.getElementById("newTechnology");
-    const addTechnologyBtn = document.getElementById("addTechnologyBtn");
+    const addBtn = document.getElementById("addTechnologyBtn");
+    const technologyTagsContainer = document.getElementById("technologyTagsContainer");
+    const technologiesInputs = document.getElementById("technologiesInputs");
 
-    // Функция для добавления новой технологии
-    function addTechnology(technology) {
-        if (!technology.trim()) return;
+    function updateHiddenInputs() {
+        technologiesInputs.innerHTML = ""; // Очистка предыдущих значений
 
-        // Создаем элемент тега
-        const tag = document.createElement("div");
-        tag.classList.add("technology-tag");
-        tag.textContent = technology;
-
-        // Добавляем кнопку для удаления
-        const removeBtn = document.createElement("span");
-        removeBtn.classList.add("remove-btn");
-        removeBtn.textContent = "x";
-        tag.appendChild(removeBtn);
-
-        // Обработчик события для удаления технологии
-        removeBtn.addEventListener("click", function () {
-            technologyInputs.removeChild(tag);
+        technologyList.forEach(tech => {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "technology"; // Это имя должно совпадать с параметром контроллера
+            input.value = tech;
+            technologiesInputs.appendChild(input);
         });
-
-        // Добавляем тег в контейнер
-        technologyInputs.appendChild(tag);
-
-        // Очищаем поле ввода
-        newTechnologyInput.value = "";
     }
 
-    // Обработчик клика на кнопку "Добавить"
-    addTechnologyBtn.addEventListener("click", function () {
-        const technology = newTechnologyInput.value.trim();
-        addTechnology(technology);
-    });
+    function renderTechnologyTags() {
+        technologyTagsContainer.innerHTML = "";
 
-    // Обработчик нажатия Enter в поле ввода
-    newTechnologyInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            const technology = newTechnologyInput.value.trim();
-            addTechnology(technology);
+        technologyList.forEach((tech, index) => {
+            const tag = document.createElement("div");
+            tag.className = "technology-tag";
+            tag.textContent = tech;
+
+            const removeBtn = document.createElement("span");
+            removeBtn.classList.add("remove-btn");
+            removeBtn.textContent = "×";
+            removeBtn.onclick = () => {
+                technologyList.splice(index, 1);
+                updateHiddenInputs();
+                renderTechnologyTags();
+            };
+
+            tag.appendChild(removeBtn);
+            technologyTagsContainer.appendChild(tag);
+        });
+    }
+
+    addBtn.addEventListener("click", function () {
+        const value = newTechnologyInput.value.trim();
+
+        if (value && !technologyList.includes(value)) {
+            if (technologyList.length >= 5) {
+                alert("Можно добавить максимум 5 технологий.");
+                return;
+            }
+
+            technologyList.push(value);
+            newTechnologyInput.value = "";
+            updateHiddenInputs();
+            renderTechnologyTags();
         }
     });
 });

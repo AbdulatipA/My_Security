@@ -22,12 +22,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/icons/**", "/js/**").permitAll()
-                        .requestMatchers("/api/v1/profile", "/api/v1/editProfile").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/css/**", "/icons/**","/js/**", "/api/v1/profile").permitAll()
+                        .requestMatchers("/api/v1/editProfile").authenticated()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/api/v1/login")
                         .defaultSuccessUrl("/api/v1/profile")
                         .permitAll()
                 )

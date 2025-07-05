@@ -29,9 +29,9 @@ public class AuthorizationController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Principal principal) {
-        String username = principal.getName();
-        User user = userService.findByUsername(username);
+    public String showProfile(Model model) {
+       // String username = principal.getName();
+        User user = userService.findByUsername("admin");
 
         model.addAttribute("user", user);
         return "profile";
